@@ -5,7 +5,6 @@ let router = Router();
 router.post('/', (req, res) => {
     try {
         let data = req.body;
-        console.log(data);
 
         if (!data.payload) {
             console.error('Invalid data format.');
