@@ -4,10 +4,11 @@ let router = Router();
 
 router.post('/', (req, res) => {
     try {
-        const data = JSON.parse(req.body);
+        let data = req.body;
+        console.log(data);
 
-        if (!data.payload || !data.payload.push) {
-            res.send('Request data is incorrectly formatted.');
+        if (!data.payload) {
+            console.error('Invalid data format.');
         }
 
         res.json({
