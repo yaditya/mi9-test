@@ -8,7 +8,7 @@ export default function() {
     let app = express();
     app.server = http.createServer(app);
     app.set('port', port);
-    app.use(bodyParser.json());
+    app.use(bodyParser.text());
 
     // apply the routes to our application
     app.use('/', routes);
