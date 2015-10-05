@@ -3,6 +3,8 @@ import {Router} from 'express';
 let router = Router();
 
 router.post('/', (req, res) => {
+    res.header('Access-Control-Allow-Origin', '*');
+
     try {
         let data = req.body;
 
