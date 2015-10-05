@@ -1,15 +1,13 @@
 import bodyParser from 'body-parser';
 import express from 'express';
-import http from 'http';
 import routes from './routes';
 
 export default function() {
     let port = process.env.PORT || 3000;
     let app = express();
-    app.server = http.createServer(app);
+    // app.server = http.createServer(app);
     app.set('port', port);
-    app.use(bodyParser.urlencoded({ extended: true }));
-    app.use(bodyParser.text());
+    app.use(bodyParser.text({type: '*/*'}));
 
     // apply the routes to our application
     app.use('/', routes);

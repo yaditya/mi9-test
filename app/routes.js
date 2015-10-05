@@ -3,13 +3,18 @@ import {Router} from 'express';
 let router = Router();
 
 router.post('/', (req, res) => {
+
+    let data;
+
     try {
-        const data = JSON.parse(req.body);
+        data = JSON.parse(req.body);
+    } catch(e) {
+        res.status(400).json({ error: 'Could not decode request: Invalid JSON format' });
+    }
 
-        if (!data.payload || !data.payload.push) {
-            res.send('Request data is incorrectly formatted.');
-        }
-
+    if (!data || !data.payload) {
+        console.error('Invalid data');
+    } else {
         res.json({
             response:
                 data
@@ -27,8 +32,6 @@ router.post('/', (req, res) => {
                     };
                 })
         });
-    } catch (err) {
-        res.status(400).json({ error: 'Could not decode request: ' + err });
     }
 });
 
