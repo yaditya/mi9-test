@@ -10,6 +10,7 @@ router.post('/', (req, res) => {
         console.error(err);
         res.status(400).json({ error: 'Could not decode request: JSON parsing failed' });
     });
+
 });
 
 router.get('/', (req, res) => {
