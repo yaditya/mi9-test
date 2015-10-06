@@ -18,7 +18,7 @@ describe('processor', () => {
         });
     });
 
-    describe('given invalid request data is passed', () => {
+    describe('given invalid JSON data is passed', () => {
         before(() => {
             processor.post('test');
         });
