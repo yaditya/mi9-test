@@ -1,38 +1,15 @@
 import {Router} from 'express';
+import processor from './processor';
 
 let router = Router();
 
 router.post('/', (req, res) => {
-
-    let data;
-
-    try {
-        data = JSON.parse(req.body);
-
-        if (data && data.payload) {
-            res.json({
-                response:
-                    data
-                    .payload
-                    .filter((item) => {
-                        return item.image &&
-                                item.drm &&
-                                item.episodeCount > 0;
-                    })
-                    .map((item) => {
-                        return {
-                            image: item.image.showImage,
-                            slug: item.slug,
-                            title: item.title
-                        };
-                    })
-            });
-        } else {
-            res.send('Invalid data');
-        }
-    } catch(err) {
-        res.status(400).json({ error: 'Could not decode request: ' + err });
-    }
+    processor.post(req.body).then((data) => {
+        res.json(data);
+    }).catch((err) => {
+        console.error(err);
+        res.status(400).json({ error: 'Could not decode request: JSON parsing failed' });
+    });
 });
 
 router.get('/', (req, res) => {
